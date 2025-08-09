@@ -1,0 +1,18 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8 col-sm-12 text-center">
+            <h1>Cart Conflict</h1>
+            <p>Your cart already contains items from a different restaurant.</p>
+            <p>Would you like to remove all items from your cart and add <strong>{{ menu_item.name }}</strong> from <strong>{{ menu_item.restaurant }}</strong>?</p>
+            <form action="{% url 'cart_confirmation' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, clear my cart and add this item</button>
+                <a href="{% url 'menu' %}" class="btn btn-secondary">No, go back</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

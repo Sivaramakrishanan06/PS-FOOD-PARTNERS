@@ -1,0 +1,83 @@
+{% extends 'restaurant/base.html' %}
+
+{% block title %}Order Management{% endblock %}
+
+{% block content %}
+<h1>Order Management for {{ restaurant.name }}</h1>
+
+<!-- Date Selection -->
+<form method="get" action="{% url 'order_management' %}">
+    <div class="mb-3 d-flex align-items-center">
+        <label for="date-picker" class="form-label mb-0" style="margin-right: 10px;">Select Date:</label>
+        <div class="input-group" style="max-width: 150px;">
+            <input type="text" id="date-picker" name="date" 
+                   class="form-control form-control-sm" 
+                   value="{{ selected_date|date:'d M, Y' }}" 
+                   autocomplete="off" 
+                   style="height: 38px; font-size: 14px;">
+            <span class="input-group-text" 
+                  style="height: 38px; font-size: 14px; padding: 0 8px;">
+                <i class="fas fa-calendar-alt"></i>
+            </span>
+        </div>
+    </div>
+</form>
+
+<p>Orders Count: {{ orders|length }} (for {{ selected_date }})</p>
+
+<!-- Table Container for Horizontal Scrolling -->
+<div class="table-responsive">
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Order ID</th>
+                <th>User</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Assigned To</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.user.username }}</td>
+                    <td>₹{{ order.total_amount }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.created_at }}</td>
+                    <td>
+                        {% if order.assigned_to %}
+                            {{ order.assigned_to.user.username }}
+                        {% else %}
+                            Not Assigned
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'order_detail' order.id %}" class="btn btn-info btn-sm">View</a>
+                        <!-- Removed the "Mark as Delivering" button -->
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7">No orders found for {{ selected_date }}.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Initialize Flatpickr -->
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#date-picker", {
+            dateFormat: "d M, Y", // Format should be '15 Aug, 2024'
+            onChange: function(selectedDates, dateStr, instance) {
+                instance.element.form.submit();
+            }
+        });
+    });
+</script>
+
+{% endblock %}

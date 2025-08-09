@@ -1,0 +1,51 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-8">
+            <div class="card shadow-sm rounded">
+                <div class="card-header bg-dark text-white rounded-top">
+                    <h4 class="mb-0">Edit Delivery User</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+                            <input type="text" name="username" id="{{ form.username.id_for_label }}" class="form-control border-3 rounded-3" value="{{ form.username.value|default_if_none:'' }}">
+                            {{ form.username.errors }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.first_name.id_for_label }}" class="form-label">First Name</label>
+                            <input type="text" name="first_name" id="{{ form.first_name.id_for_label }}" class="form-control border-3 rounded-3" value="{{ form.first_name.value|default_if_none:'' }}">
+                            {{ form.first_name.errors }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.last_name.id_for_label }}" class="form-label">Last Name</label>
+                            <input type="text" name="last_name" id="{{ form.last_name.id_for_label }}" class="form-control border-3 rounded-3" value="{{ form.last_name.value|default_if_none:'' }}">
+                            {{ form.last_name.errors }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                            <input type="email" name="email" id="{{ form.email.id_for_label }}" class="form-control border-3 rounded-3" value="{{ form.email.value|default_if_none:'' }}">
+                            {{ form.email.errors }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.phone_number.id_for_label }}" class="form-label">Phone Number</label>
+                            <input type="text" name="phone_number" id="{{ form.phone_number.id_for_label }}" class="form-control border-3 rounded-3" value="{{ form.phone_number.value|default_if_none:'' }}">
+                            {{ form.phone_number.errors }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.address.id_for_label }}" class="form-label">Address</label>
+                            <textarea name="address" id="{{ form.address.id_for_label }}" class="form-control border-3 rounded-3" rows="4">{{ form.address.value|default_if_none:'' }}</textarea>
+                            {{ form.address.errors }}
+                        </div>
+                        <button type="submit" class="btn btn-dark rounded-3 w-100">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

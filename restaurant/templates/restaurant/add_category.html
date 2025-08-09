@@ -1,0 +1,26 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">  <!-- Reduced width by changing col-md-6 to col-md-5 -->
+            <div class="card shadow-sm rounded" > <!-- Increased height by setting min-height -->
+                <div class="card-header bg-dark text-white rounded-top">
+                    <h2 class="h4 mb-0">Add Category</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="{{ form.name.id_for_label }}" class="form-label">Category Name</label>
+                            <input type="text" name="name" id="{{ form.name.id_for_label }}" class="form-control rounded-3 border-2" value="{{ form.name.value|default_if_none:'' }}">
+                            
+                        </div>
+                        <button type="submit" class="btn btn-dark rounded-3 w-100">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

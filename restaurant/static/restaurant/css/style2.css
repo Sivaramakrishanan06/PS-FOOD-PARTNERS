@@ -1,0 +1,111 @@
+
+/* Navbar styling */
+.navbar {
+    background-color: #f8f9fa; 
+    border-bottom: 1px solid #e5e5e5; /* Subtle border at the bottom */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.nav-link {
+    font-size: 16px; /* Standard font size */
+    color: #333; /* Dark color for text */
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.nav-link:hover {
+    color: #007bff; /* Change color on hover */
+}
+
+.nav-item .dropdown-menu {
+    border-radius: 0; /* Remove rounded corners */
+}
+
+.nav-item .dropdown-menu .dropdown-item {
+    padding: 10px 20px; /* Adjust padding for dropdown items */
+}
+
+.nav-item .dropdown-toggle {
+    font-size: 16px;
+    color: #333;
+}
+
+.nav-item .dropdown-toggle:hover {
+    color: #007bff; /* Change color on hover */
+}
+
+.navbar-toggler {
+    border-color: #007bff; /* Toggler button border color */
+}
+
+
+
+.nav-link i {
+    margin-right: 8px; /* Space between icon and text */
+}
+
+.btn-outline-danger {
+    border-color: #dc3545; /* Red border for logout button */
+    color: #dc3545; /* Red text color */
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545; /* Red background on hover */
+    color: #fff; /* White text on hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* profile.css */
+
+/* Heading styles */
+#profile-header {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Professional font family */
+    font-size: 48px; /* Larger font size */
+    font-weight: 700; /* Bold font weight */
+    color: #333; /* Dark text color for better readability */
+    line-height: 1.2; /* Tight line height for a clean look */
+    margin-bottom: 8px; /* Space below heading */
+    text-transform: uppercase;
+}
+
+#profile-description {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Matching font family */
+    font-size: 20px; /* Slightly larger font size */
+    color: #666; /* Medium gray text color */
+    margin-top: 0; /* No top margin */
+    margin-bottom: 16px; /* Space below paragraph */
+}
+
+.card-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Matching font family */
+    font-size: 24px; /* Medium-large font size */
+    font-weight: 600; /* Semi-bold font weight */
+    color: #333; /* Dark text color */
+    margin-bottom: 8px; /* Space below heading */
+}
+
+.card-text {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Matching font family */
+    font-size: 16px; /* Standard font size */
+    color: #555; /* Slightly lighter gray */
+}

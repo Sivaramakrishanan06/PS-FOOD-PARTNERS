@@ -1,0 +1,25 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<body class="custom-background">
+
+    
+<div class="container mb-5 raf" >
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8 col-md-8 col-sm-8  p-4 text-center">
+            <!-- <h1 class=" fw-bolder text-outline opacity-75 "  >DELIVER</h1> -->
+            <h1 class="fw-bolder text-outline ">
+                <span>P</span><span>S</span><span>  </span><span>FOOD-PARTNERS</span>
+              </h1>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-1  " >
+        <div class="card col-lg-5  col-md-8 col-sm-12 rahh  p-4 text-center opacity-75 rounded-5"  >
+            <h2>Craving Something Delicious?</h2>
+            <a href="{% url 'menu' %}" class="btn btn-dark fw-bold mt-1">Order Now!</a>
+        </div>
+    </div>
+</div>
+
+</body>
+{% endblock content %}

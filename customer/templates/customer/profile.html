@@ -1,0 +1,40 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mt-4 mb-3">
+    <h2 class="mb-4">Profile</h2>
+    
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title mb-4 fw-bolder text-uppercase  ">User Information</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+                    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Phone Number:</strong> {{ user_profile.phone_number }}</p>
+                </div>
+            </div>
+            
+            <h5 class="mt-4 mb-3 fw-bolder text-uppercase ">Address</h5>
+            <div class="row">
+                {% if user_profile.street and user_profile.city and user_profile.state and user_profile.pin %}
+                    <div class="col-md-6">
+                        <p><strong>Street:</strong> {{ user_profile.street }}</p>
+                        <p><strong>City:</strong> {{ user_profile.city }}</p>
+                        <p><strong>State:</strong> {{ user_profile.state }}</p>
+                        <p><strong>Pin:</strong> {{ user_profile.pin }}</p>
+                    </div>
+                {% else %}
+                    <div class="col-md-6">
+                        <p>No address provided.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <a href="{% url 'profile_edit' %}" class="btn btn-dark mt-3">Edit Profile</a>
+</div>
+{% endblock %}

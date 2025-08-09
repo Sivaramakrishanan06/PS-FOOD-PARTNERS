@@ -1,0 +1,115 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <!-- Restaurant Details -->
+    <div class="row mt-5">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <h1 class="restaurant-name">{{ restaurant.name }}</h1>
+            <p><i class="fas fa-info-circle"></i> {{ restaurant.description }}</p>
+            <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> {{ restaurant.address }}</p>
+            <p><i class="fas fa-phone"></i> <strong>Phone:</strong> {{ restaurant.phone }}</p>
+            <p><i class="fas fa-envelope"></i> <strong>Email:</strong> {{ restaurant.email }}</p>
+            {% if restaurant.categories.all %}
+            <div class="mt-3">
+                <h4 class="mb-3">Categories</h4>
+                <div class="d-flex flex-wrap">
+                    {% for category in restaurant.categories.all %}
+                    <span class="bg-light text-dark rounded-pill bg-light-subtle px-3 py-2 me-2 mb-2">
+                        {{ category.name }}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Menu Items -->
+    <div class="row mt-5 ">
+        <div class="col-12">
+            <h4 class="text-uppercase ">Menu Items</h4>
+        </div>
+        {% if menu_items %}
+        {% for item in menu_items %}
+        <div class="col-md-4 col-sm-12 mb-4">
+            <div class="card border-0 shadow-sm rounded">
+                <a href="{% url 'menu-item-detail' item.pk %}" class="text-decoration-none">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <p class="card-text"><strong>Price:</strong> ₹{{ item.price }}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-12">
+            <p>No menu items available for this restaurant.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Add custom CSS for card styling and text colors -->
+    <style>
+        .restaurant-name {
+            font-size: 36px; /* Font size for restaurant name */
+            text-align: center; /* Center align the name */
+            color: #333; /* Text color for the name */
+            margin-bottom: 20px; /* Space below the name */
+            text-transform: uppercase;
+        
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: none; /* Remove default border */
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 250px; /* Fixed height for uniform card sizes */
+            object-fit: cover; /* Ensures image covers the area without distortion */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            flex: 1 0 auto; /* Allows card body to fill available space */
+            padding: 1rem;
+        }
+
+        .card-title {
+            color: black; /* Set text color to black for item name */
+            font-size: 18px; /* Font size for item name */
+        }
+
+        .card-text {
+            color: black; /* Set text color to black for description and price */
+            font-size: 16px; /* Font size for description and price */
+        }
+
+        .badge {
+            font-size: 14px; /* Font size for category badges */
+            padding: 0.5em 1em;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+{% endblock content %}

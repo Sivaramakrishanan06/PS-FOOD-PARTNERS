@@ -1,0 +1,50 @@
+name: food_delivery_app  # Your app's name (lowercase_with_underscores)
+description: A food delivery app using Supabase
+version: 1.0.0+1  # Version number (major.minor.patch+build)
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'  # Dart SDK constraint
+
+dependencies:
+  flutter:
+    sdk: flutter
+  supabase_flutter: ^2.13.0  # Supabase package
+  http: ^1.1.0  # For API calls (optional)
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0  # For code analysis
+
+  // Sign up
+await supabase.auth.signUp(
+  email: 'user@example.com',
+  password: 'password',
+);
+
+// Sign in
+await supabase.auth.signInWithPassword(
+  email: 'user@example.com',
+  password: 'password',
+);
+
+// Sign out
+await supabase.auth.signOut();
+
+// Upload
+final file = File('path/to/image.jpg');
+await supabase.storage
+  .from('food_images')
+  .upload('unique-id.jpg', file);
+
+// Download URL
+final url = supabase.storage
+  .from('food_images')
+  .getPublicUrl('unique-id.jpg');
+
+ final subscription = supabase
+  .from('orders')
+  .stream(primaryKey: ['id'])
+  .listen((data) {
+    // Handle updates
+  }); 

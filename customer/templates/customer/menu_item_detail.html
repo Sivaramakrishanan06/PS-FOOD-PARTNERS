@@ -1,0 +1,313 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<style>
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+   
+
+    /* .custom-btn {
+        background-color: #343a40;
+        color: #fff;
+        border-radius: 5px;
+        padding: 10px 30px;
+        font-size: 16px;
+        border: 2px solid #343a40;
+        transition: all 0.3s ease;
+    }
+
+    .custom-btn:hover {
+        background-color: #ffffff;
+        color: #343a40;
+        border-color: #343a40;
+    } */
+
+    .display-4 {
+        font-size: 2.5rem;
+    }
+
+    .fs-5 {
+        font-size: 20px;
+    }
+
+    .fs-6 {
+        font-size: 16px;
+    }
+
+    .shadow {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Additional media queries to ensure responsiveness */
+    @media (max-width: 767px) {
+        .custom-btn {
+            font-size: 14px;
+            padding: 8px 20px;
+        }
+
+        .display-4 {
+            font-size: 2rem;
+        }
+
+        .fs-5 {
+            font-size: 18px;
+        }
+
+        .fs-6 {
+            font-size: 14px;
+        }
+    }
+
+    /* //////
+     */
+
+     .cart-button {
+            position: relative;
+            padding: 10px;
+            width: 160px;
+            height: 45px;
+            border: 0;
+            border-radius: 15px;
+            background-color: #2f4f4f;
+            
+            cursor: pointer;
+            color: #000;
+            transition: .01s ease-in-out;
+            overflow: hidden;
+            font-weight: 700;
+            font-size: small;
+          }
+
+          .cart-button:hover {
+            background-color: #0c0e0e70;
+          }
+          .cart-button:active {
+            transform: scale(.9);
+          }
+
+          .cart-button .fa-cart-shopping {
+            position: absolute;
+            z-index: 2;
+            top: 50%; left: -10%;
+            font-size: 2em;
+            transform: translate(-50%, -50%);
+          }
+          .cart-button .fa-box {
+            position: absolute;
+            z-index: 3;
+            top: -20%; left: 52%;
+            font-size: 1.2em;
+            transform: translate(
+                -50%, -50%);
+            color: gold;
+          }
+
+        .cart-button span {
+            position: absolute;
+            z-index: 3;
+            left: 50%;
+            top: 50%;
+            font-size: 1.3em;
+            color: #fefefe;
+            transform: translate(-50%, -50%);
+            font-size: 15px;
+        }
+
+        .cart-button span
+        .add-to-cart {
+            opacity: 1;
+        }
+
+        .cart-button span.added {
+            opacity: 0;
+        }
+
+        .cart-button.clicked .fa-cart-shopping {
+            animation: truck 1.2s ease-in-out forwards;
+        }
+
+        .cart-button.clicked .fa-box {
+            animation: box 1.2s ease-in-out forwards;
+        }
+
+        .cart-button.clicked span.add-to-cart {
+            animation: txt1 1.2s ease-in-out forwards;
+        }
+
+        .cart-button.clicked span.added {
+            animation: txt2 1.2s ease-in-out forwards;
+        }
+
+        @keyframes truck {
+            0% { left: -10%; }
+            40%,
+            55% { left: 50%; }
+            100% { left: 110%; }
+        }
+
+        @keyframes box {
+            0%,
+            40% { top: -20%; left: -5%; }
+            55% { top: 37%; left: 52%; }
+            100% { top: 37%; left: 110%; } }
+
+        @keyframes txt1 {
+            0% { opacity: 1; }
+            20%,
+            100% { opacity: 0; } }
+
+        @keyframes txt2 {
+            0%,
+            80% { opacity: 0; }
+            100% { opacity: 1; } }
+
+
+
+
+
+</style>
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8 col-sm-12 text-center mb-5">
+            <h1 class="display-4 mb-3">{{ menu_item.name }}</h1>
+            <img src="{{ menu_item.image.url }}" class="img-fluid rounded shadow" width="450" height="300" data-bs-toggle="modal" data-bs-target="#itemModal{{ menu_item.pk }}" alt="{{ menu_item.name }}">
+            
+            <h5 class="mt-3 text-muted">{{ menu_item.restaurant.name }}</h5>
+            
+            <div class="d-flex justify-content-center align-items-center mt-3">
+                <p class="fs-5 me-3 mb-0">Price: ₹{{ menu_item.price }}</p>
+                <form action="{% url 'add_to_cart' menu_item.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                    <!-- <button type="submit" class="btn custom-btn">Add to Cart</button> -->
+                    <div>
+                    <button  type="submit" class=" cart-button">
+                        <span class="add-to-cart">Add to cart</span>
+                        <span class="added"> <i class="fa-solid fa-circle-check"></i> Done </span>
+                        <i class="fa-solid fa-cart-shopping"></i>   
+                        <i class="fas fa-box"></i>
+                    </button>
+                </div>
+                
+                </form>
+            </div>
+            
+            <p class="mt-3 fs-6 text-muted">Desc: {{ menu_item.description }}</p>
+        
+            <!-- Accordion for other items from the same restaurant -->
+            <div class="accordion mt-5" id="restaurantItemsAccordion">
+                {% for category, items in restaurant_items.items %}
+                    <div class="accordion-item mb-2 border-2 ">
+                        <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                {{ category }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse{% if forloop.first %} show{% endif %}" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#restaurantItemsAccordion">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    {% for item in items %}
+                                        <div class="col-lg-12 mb-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="me-3">
+                                                    <!-- Image triggers specific modal for each item -->
+                                                    <img src="{{ item.image.url }}" class="rounded" width="150" height="150" alt="{{ item.name }}" data-bs-toggle="modal" data-bs-target="#itemModal{{ item.pk }}">
+                                                </div>
+                                                <div>
+                                                    <h5>{{ item.name }}</h5>
+                                                    <p>Price: ₹{{ item.price }}</p>
+                                                    <p>{{ item.description }}</p>
+                                                    <form action="{% url 'add_to_cart' item.pk %}" method="post">
+                                                        {% csrf_token %}
+                                                        <!-- <button type="submit" class="btn custom-btn">Add to Cart</button> -->
+                                                        <button  type="submit" class=" cart-button">
+                                                            <span class="add-to-cart">Add to cart</span>
+                                                            <span class="added"> <i class="fa-solid fa-circle-check"></i> Done </span>
+                                                            <i class="fa-solid fa-cart-shopping"></i>   
+                                                            <i class="fas fa-box"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% empty %}
+                                        <p>No items available in this category.</p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals for each item -->
+{% for category, items in restaurant_items.items %}
+    {% for item in items %}
+        <div class="modal fade" id="itemModal{{ item.pk }}" tabindex="-1" aria-labelledby="itemModalLabel{{ item.pk }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="itemModalLabel{{ item.pk }}">{{ item.name }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <!-- Left column for text and form -->
+                            <div class="col-md-6 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h5>Price: ${{ item.price }}</h5>
+                                    <p>{{ item.description }}</p>
+                                </div>
+                                <form action="{% url 'add_to_cart' item.pk %}" method="post">
+                                    {% csrf_token %}
+                                    <!-- <button type="submit" class="btn custom-btn">Add to Cart</button> -->
+                                    <button  type="submit" class=" cart-button mb-3">
+                                        <span class="add-to-cart">Add to cart</span>
+                                        <span class="added"> <i class="fa-solid fa-circle-check"></i> Done </span>
+                                        <i class="fa-solid fa-cart-shopping"></i>   
+                                        <i class="fas fa-box"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <!-- Right column for image -->
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <img src="{{ item.image.url }}" class="img-fluid" alt="{{ item.name }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<!-- Include Bootstrap JS if not already included in your base template -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    const cartButtons = document.querySelectorAll('.cart-button');
+
+cartButtons.forEach(button => {
+    button.addEventListener('click', cartClick);
+});
+
+function cartClick(event) {
+    event.preventDefault(); // Prevent form submission
+    let button = this;
+    button.classList.add('clicked');
+
+    setTimeout(() => {
+        button.classList.remove('clicked');
+        button.closest('form').submit(); 
+    }, 1000); 
+}
+
+</script>
+
+
+{% endblock %}

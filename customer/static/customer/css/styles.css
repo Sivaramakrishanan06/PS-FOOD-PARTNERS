@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+:root {
+  --OrangeLight: #f7f5eb;
+  --JangoLightBlue: #91c6ffc3;
+}
+
+
+
+
+
+/* .content{
+  background-color: var(--OrangeLight);
+  background: linear-gradient(var(--OrangeLight), var(--Orange));
+  padding: 2.5em 0 4.5em 0;
+  position: relative;
+} */
+
+.content {
+    
+    background-color: #d5dcdc;
+  
+    color: black; 
+    font-family: Arial, sans-serif;
+  }
+
+
+  .custom-background .content {
+    
+    background-image: url('./IMG-20240819-WA0019.jpg') !important;
+   
+    
+  }
+  .ra .content{
+   
+    width: 100%;
+    position: relative;
+    background: linear-gradient(
+      to right top,
+     var(--JangoLightBlue),
+     var(--OrangeLight),
+     
+     
+     var(--OrangeLight),
+     var(--JangoLightBlue)
+    );
+    background-size: 300% 300% ;;
+    animation: Rainbow 10s infinite ;
+  }
+  
+  @keyframes Rainbow {
+    0% {
+      background-position: 94% 0%;
+    }
+    50% {
+      background-position: 7% 100%;
+    }
+    100% {
+      background-position: 94% 0%;
+    }
+  }
+  
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+} 
+
+
+
+.raf .text-outline {
+  font-family: 'Dancing Script', cursive;
+  font-size: 88px;
+  color: transparent;
+  -webkit-text-stroke: 2px white;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+  
+}
+
+.raf h2{
+  font-family: 'Dancing Script', cursive;
+
+}
+@media (max-width: 767px) {
+  .raf .text-outline {
+    font-size: 70px; 
+    -webkit-text-stroke: 1px white; 
+    font-weight: bolder;
+  }
+  .rahh{
+    width: 390px;
+  }
+}
+
+.raf .text-outline span {
+  display: inline-block;
+  transition: color 0.3s ease, -webkit-text-fill-color 0.3s ease;
+}
+
+.raf .text-outline span:hover {
+  -webkit-text-fill-color: white; /* Fill color on hover */
+  color: white; /* Fallback for browsers that don't support -webkit-text-fill-color */
+}
+
+
+
+/* Navbar styling */
+.navbar {
+  background-color: #f8f9fa; /* Light gray background */
+  border-bottom: 1px solid #e5e5e5; /* Subtle border at the bottom */
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.nav-link {
+  font-size: 16px; /* Standard font size */
+  color: #333; /* Dark color for text */
+  transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.nav-link:hover {
+  color: #007bff; /* Change color on hover */
+}
+
+.nav-item .dropdown-menu {
+  border-radius: 0; /* Remove rounded corners */
+}
+
+.nav-item .dropdown-menu .dropdown-item {
+  padding: 10px 20px; /* Adjust padding for dropdown items */
+}
+
+.nav-item .dropdown-toggle {
+  font-size: 16px;
+  color: #333;
+}
+
+.nav-item .dropdown-toggle:hover {
+  color: #007bff; /* Change color on hover */
+}
+
+.navbar-toggler {
+  border-color: #007bff; /* Toggler button border color */
+}
+
+.nav-link i {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+.btn-outline-danger {
+  border-color: #dc3545; /* Red border for logout button */
+  color: #dc3545; /* Red text color */
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545; /* Red background on hover */
+  color: #fff; /* White text on hover */
+}
+
+.btn-outline-primary {
+  border-color: #007bff; /* Blue border for sign-in button */
+  color: #007bff; /* Blue text color */
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff; /* Blue background on hover */
+  color: #fff; /* White text on hover */
+}
+
+
+
+
+ /* Style for Accordion for menu item detail */
+ .accordion-button {
+  text-align: left; /* Align text to the left */
+  font-weight: bold; /* Make text bold */
+  padding-left: 20px; /* Add padding to the left */
+}
+
+/* Style for Accordion Body Content */
+.accordion-body {
+  text-align: left; /* Align text to the left */
+  padding: 20px; /* Add padding for spacing */
+}
+
+/* Ensure that images and text within the accordion are aligned properly */
+.accordion-body .d-flex {
+  align-items: center; /* Align items vertically */
+}
+
+.accordion-body img {
+  margin-right: 15px; /* Add space between the image and the text */
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .accordion-button {
+      padding-left: 10px; /* Reduce padding on smaller screens */
+      font-size: 16px; /* Adjust font size for readability */
+  }
+
+  .accordion-body {
+      padding: 15px; /* Adjust padding for smaller screens */
+  }
+}
+
+/* Base styles */
+.fw-bolder.text-outline {
+  white-space: nowrap; /* This prevents text from wrapping */
+}
+
+/* Media queries for responsive adjustments */
+@media (max-width: 768px) {
+  .fw-bolder.text-outline {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .fw-bolder.text-outline {
+    font-size: 0.8rem; /* Further adjust for very small screens */
+  }
+}
+
+/* Optional: If you're using the span elements for styling */
+.fw-bolder.text-outline span {
+  display: inline; /* Ensures spans stay inline (default behavior, but good to specify) */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Custom dropdown button styles */
+.custom-dropdown {
+  
+  height: 35px; 
+ 
+}
+

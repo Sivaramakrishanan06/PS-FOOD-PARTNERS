@@ -1,0 +1,121 @@
+{% extends 'restaurant/base.html' %}
+
+{% block title %}Manage Menu{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Menu for {{ restaurant.name }}</h1>
+
+    <!-- Links to Add Menu Item and Category -->
+    <div class="text-center mb-4">
+        <a href="{% url 'add_category' %}" class="btn btn-dark mx-2">
+            <i class="fas fa-plus"></i> Add Category
+        </a>
+        <a href="{% url 'add_menu_item' %}" class="btn btn-dark mx-2">
+            <i class="fas fa-plus"></i> Add Menu Item
+        </a>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="mb-5">
+        <h3 class="mb-4">Categories</h3>
+        <ul class="list-group">
+            {% for category in categories %}
+                <li class="list-group-item d-flex justify-content-between align-items-center mb-2 border-1">
+                    <span class="category-name" id="category-name-{{ category.pk }}">{{ category.name }}</span>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary btn-sm edit-btn" data-id="{{ category.pk }}">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <form method="post" action="{% url 'edit_category' category.pk %}" class="d-none edit-form" id="edit-form-{{ category.pk }}" style="display: flex; align-items: center;">
+                            {% csrf_token %}
+                            <input type="text" name="category_name" value="{{ category.name }}" class="form-control d-inline w-75" style="margin-right: 8px;">
+                            <button type="submit" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-check"></i> Update
+                            </button>
+                        </form>
+                        <form method="post" action="{% url 'delete_category' category.pk %}" class="d-none delete-form ms-2" id="delete-form-{{ category.pk }}" style="display: flex; align-items: center;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Menu Items Section -->
+    <div class="mb-5">
+        <h3 class="mb-4">Menu Items</h3>
+        <div class="row">
+            {% for item in menu_items %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 border-1">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" class="card-img-top img-fluid" alt="{{ item.name }}" style="object-fit: cover; height: 250px; width: 100%;">
+                        {% endif %}
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="card-title">{{ item.name }}</h4>
+                            <h6 class="card-subtitle mb-1 text-muted">Category: {{ item.category }}</h6>
+                            <p class="card-text">Desc: {{ item.description }}</p>
+                            <p class="card-text fw-medium">Price: ₹{{ item.price }}</p>
+                            <div class="mt-auto">
+                                <a href="{% url 'edit_menu_item' item.pk %}" class="btn btn-secondary w-100 mb-2">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="{% url 'delete_menu_item' item.pk %}" class="btn btn-danger w-100">
+                                    <i class="fas fa-trash"></i> Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="pagination">
+            <span class="step-links">
+                {% if menu_items.has_previous %}
+                    <a href="?page=1" class="btn btn-outline-secondary"><i class="fas fa-angle-double-left"></i> First</a>
+                    <a href="?page={{ menu_items.previous_page_number }}" class="btn btn-outline-secondary"><i class="fas fa-angle-left"></i> Previous</a>
+                {% endif %}
+                <span class="current btn btn-outline-secondary disabled">
+                    Page {{ menu_items.number }} of {{ menu_items.paginator.num_pages }}.
+                </span>
+                {% if menu_items.has_next %}
+                    <a href="?page={{ menu_items.next_page_number }}" class="btn btn-outline-secondary"><i class="fas fa-angle-right"></i> Next</a>
+                    <a href="?page={{ menu_items.paginator.num_pages }}" class="btn btn-outline-secondary"><i class="fas fa-angle-double-right"></i> Last</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.edit-btn').on('click', function() {
+            var categoryId = $(this).data('id');
+            $('#edit-form-' + categoryId).toggleClass('d-none');
+            $('#delete-form-' + categoryId).toggleClass('d-none');
+            $('#category-name-' + categoryId).toggleClass('d-none');
+            $(this).toggleClass('d-none');
+        });
+
+        // Optional: Hide the forms and name when clicking outside
+        $(document).on('click', function(event) {
+            if (!$(event.target).closest('.edit-btn, .edit-form, .delete-form').length) {
+                $('.edit-form, .delete-form').addClass('d-none');
+                $('.category-name').removeClass('d-none');
+                $('.edit-btn').removeClass('d-none');
+            }
+        });
+    });
+</script>
+{% endblock content %}

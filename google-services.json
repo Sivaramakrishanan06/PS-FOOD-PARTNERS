@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1052120629083",
+    "project_id": "ps-food-partners",
+    "storage_bucket": "ps-food-partners.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052120629083:android:f907135bfda0d156a1e47e",
+        "android_client_info": {
+          "package_name": "com.siva.psfoodpartners"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHn04ajoPDzQUo4_u51JufR800hxq_1-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

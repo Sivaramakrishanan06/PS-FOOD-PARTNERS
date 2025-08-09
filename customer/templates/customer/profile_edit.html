@@ -1,0 +1,78 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mt-4 mb-3">
+    <h2 class="mb-4">Edit Profile</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="border p-4 mb-4 bg-light-subtle">
+            <h3 class="text-center fw-bolder text-uppercase">User Info</h3>
+           
+            <div class="mb-3">
+                <label for="{{ user_form.first_name.id_for_label }}" class="form-label">First Name</label>
+                <input type="text" name="first_name" id="{{ user_form.first_name.id_for_label }}" class="form-control border-2"
+                       value="{{ user_form.first_name.value|default_if_none:'' }}" 
+                       placeholder="Enter your first name">
+            </div>
+            <div class="mb-3">
+                <label for="{{ user_form.last_name.id_for_label }}" class="form-label">Last Name</label>
+                <input type="text" name="last_name" id="{{ user_form.last_name.id_for_label }}" class="form-control border-2"
+                       value="{{ user_form.last_name.value|default_if_none:'' }}" 
+                       placeholder="Enter your last name">
+            </div>
+            <div class="mb-3">
+                <label for="{{ user_form.email.id_for_label }}" class="form-label">Email</label>
+                <input type="email" name="email" id="{{ user_form.email.id_for_label }}" class="form-control border-2"
+                       value="{{ user_form.email.value|default_if_none:'' }}" 
+                       placeholder="Enter your email address">
+            </div>
+        </div>
+
+        <div class="border p-4 mb-4 bg-light-subtle">
+            <h3 class="text-center fw-bolder text-uppercase">Profile Info</h3>
+            <div class="mb-3">
+                <label for="{{ profile_form.phone_number.id_for_label }}" class="form-label">Phone Number</label>
+                <input type="text" name="phone_number" id="{{ profile_form.phone_number.id_for_label }}" class="form-control border-2"
+                       value="{{ profile_form.phone_number.value|default_if_none:'' }}" 
+                       placeholder="Enter your phone number">
+            </div>
+            <!-- Add other profile fields similarly -->
+        </div>
+
+        <div class="border p-4 mb-4 bg-light-subtle">
+            <h3 class="text-center fw-bolder text-uppercase">Address</h3>
+            {% if profile_form.street or profile_form.city or profile_form.state or profile_form.pin %}
+                <div class="mb-3">
+                    <label for="{{ profile_form.street.id_for_label }}" class="form-label">Street</label>
+                    <input type="text" name="street" id="{{ profile_form.street.id_for_label }}" class="form-control border-2"
+                           value="{{ profile_form.street.value|default_if_none:'' }}" 
+                           placeholder="Enter your street">
+                </div>
+                <div class="mb-3">
+                    <label for="{{ profile_form.city.id_for_label }}" class="form-label">City</label>
+                    <input type="text" name="city" id="{{ profile_form.city.id_for_label }}" class="form-control border-2"
+                           value="{{ profile_form.city.value|default_if_none:'' }}" 
+                           placeholder="Enter your city">
+                </div>
+                <div class="mb-3">
+                    <label for="{{ profile_form.state.id_for_label }}" class="form-label">State</label>
+                    <input type="text" name="state" id="{{ profile_form.state.id_for_label }}" class="form-control border-2"
+                           value="{{ profile_form.state.value|default_if_none:'' }}" 
+                           placeholder="Enter your state">
+                </div>
+                <div class="mb-3">
+                    <label for="{{ profile_form.pin.id_for_label }}" class="form-label">Pin</label>
+                    <input type="text" name="pin" id="{{ profile_form.pin.id_for_label }}" class="form-control border-2"
+                           value="{{ profile_form.pin.value|default_if_none:'' }}" 
+                           placeholder="Enter your pin code">
+                </div>
+            {% else %}
+                <p>No address information available.</p>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-dark">Save changes</button>
+    </form>
+</div>
+{% endblock %}

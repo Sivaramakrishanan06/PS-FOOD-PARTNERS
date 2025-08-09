@@ -1,0 +1,93 @@
+{% extends 'customer/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <style>
+        .login-container {
+            background-color: #ffffff; /* White background */
+            border-radius: 30px; /* Rounded corners */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+            padding: 40px; /* Increased padding */
+            margin-top: 40px; /* Adjusted margin for vertical centering */
+            width: 400px; /* Set width for container */
+        }
+        .login-title {
+            margin-bottom: 24px; /* Increased margin for spacing */
+            font-weight: bold;
+        }
+        .form-control {
+            border-color: #d1d1d1; /* Default border color */
+        }
+        .form-control:focus {
+            box-shadow: none; /* Remove default box shadow on focus */
+            border-color: #007bff; /* Change border color on focus */
+        }
+        .btn-primary {
+            background-color: #15171a; /* Custom dark color */
+            border-color: #bdc4c7;
+            border-radius: 10px; /* Rounded corners for button */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            border-color: #004085;
+        }
+        .alert-danger {
+            margin-top: 16px; /* Space between error and form */
+        }
+        .form-p {
+            margin-bottom: 24px; /* Spacing between form elements */
+        }
+        .form-p label {
+            font-weight: bold; /* Bold labels */
+            display: block; /* Make labels block elements */
+            margin-bottom: 8px; /* Spacing between label and input */
+        }
+        .form-p .form-control {
+            border-radius: 6px; /* Matching border-radius for input */
+        }
+
+          
+
+       
+    </style>
+   
+        
+   <body class="ra">
+   
+   
+    <div class="container d-flex justify-content-center align-items-center vh-100 ra">
+        <div class="login-container">
+            <h2 class="text-center login-title">Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Invalid credentials, please try again.</strong>
+                    </div>
+                {% endif %}
+                <!-- Custom form fields styling -->
+                <div class="form-p">
+                    <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+                    <input type="text" name="username" id="{{ form.username.id_for_label }}" class="form-control" 
+                           value="{{ form.username.value|default_if_none:'' }}" 
+                           placeholder="Enter your username">
+                </div>
+                <div class="form-p">
+                    <label for="{{ form.password.id_for_label }}" class="form-label">Password</label>
+                    <input type="password" name="password" id="{{ form.password.id_for_label }}" class="form-control" 
+                           value="{{ form.password.value|default_if_none:'' }}" 
+                           placeholder="Enter your password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary mt-2 w-100">Login</button>
+            </form>
+            <div class="text-center mt-3">
+                <p class="text-muted mb-0 d-inline">Not registered yet?</p>
+                <a href="{% url 'register' %}" class="nav-link d-inline font-weight-bold">Register Here</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock %}

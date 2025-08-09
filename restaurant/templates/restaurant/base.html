@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Deliver</title>
+    
+    {% load static %} 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap 5 core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+
+
+    <!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.css">
+
+<!-- Flatpickr JS -->
+
+
+    <link rel="stylesheet" href="{% static 'restaurant/css/style2.css' %}">
+
+    <style>
+        body {
+            background-color:#d5dcdc;
+        }
+
+        .navbar-custom {
+            /* background-color: #f9f6f0;  */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            border-bottom: 2px solid #e0dcd1; /* Navbar bottom border */
+        }
+
+        .navbar-nav .nav-link {
+            color: #333; /* Dark text color for nav links */
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #0056b3; /* Dark blue color on hover */
+        }
+
+        .dropdown-menu {
+            border: 1px solid #e0dcd1; /* Border for dropdown menu */
+        }
+    </style>
+</head>
+<body>
+    {% include 'restaurant/navigation.html' %}
+    {% block content %}
+    {% endblock content %}
+
+    <!-- JQuery (Bootstrap 5 no longer requires jQuery) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap 5 core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
+    <!-- Custom JavaScript (if any) -->
+  
+</body>
+</html>

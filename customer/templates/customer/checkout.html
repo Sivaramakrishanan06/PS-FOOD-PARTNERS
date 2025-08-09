@@ -1,0 +1,49 @@
+{% extends 'customer/base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+{% load custom_filters %}
+<div class="container mt-5">
+    
+    <form method="post" action="">
+        {% csrf_token %}
+        {% if cart.items.count %}
+            <h2>{{ restaurant.name }}</h2>
+            <div class="table-responsive"> <!-- Add this wrapper -->
+                <table class="table table-striped">
+                    <thead >
+                        <tr >
+                            <th class="bg-success-subtle">Item</th>
+                            <th class="bg-success-subtle">Quantity</th>
+                            <th class="bg-success-subtle">Price</th>
+                            <th class="bg-success-subtle">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart.items.all %}
+                            <tr>
+                                <td>{{ item.menu_item.name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>₹{{ item.menu_item.price|floatformat:2 }}</td>
+                                <td>₹{{ item_total|get_item:item.id|floatformat:2 }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3"><strong>Total Amount</strong></td>
+                            <td><strong>₹{{ total_amount|floatformat:2 }}</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        {% else %}
+            <p>No items in the cart</p>
+        {% endif %}
+        <div class="mt-3">
+            <button id="proceedToPaymentBtn" type="submit" class="btn btn-dark">Proceed to Payment</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

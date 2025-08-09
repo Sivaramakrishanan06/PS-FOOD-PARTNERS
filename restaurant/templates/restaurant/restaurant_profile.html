@@ -1,0 +1,42 @@
+{% extends 'restaurant/base.html' %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-6 ">
+            <div class="text-center mb-4">
+                <h1  id="profile-header">{{ restaurant.name }}</h1>
+                <p id="profile-description">{{ restaurant.description }}</p>
+            </div>
+            <div class="card border-light shadow-sm -">
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-6">
+                            <h4 class="card-title">
+                                <i class="fas fa-phone"></i> Phone
+                            </h4>
+                            <p class="card-text">{{ restaurant.phone }}</p>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h4 class="card-title">
+                                <i class="fas fa-envelope"></i> Email
+                            </h4>
+                            <p class="card-text">{{ restaurant.email }}</p>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h4 class="card-title">
+                                <i class="fas fa-map-marker-alt"></i> Address
+                            </h4>
+                            <p class="card-text">{{ restaurant.address }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

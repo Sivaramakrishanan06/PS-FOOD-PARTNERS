@@ -1,0 +1,121 @@
+{% extends 'customer/base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <style>
+        .register-container {
+            background-color: #ffffff; 
+            border-radius: 30px; 
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+            padding: 40px; 
+            margin-top: 40px; 
+            width: 500px; 
+            margin-bottom: 20px;
+        }
+        .register-title {
+            margin-bottom: 24px; 
+            font-weight: bold;
+        }
+        .form-control {
+            border-color: #d1d1d1;
+        }
+        .form-control:focus {
+            box-shadow: none; 
+            border-color: #007bff; 
+        }
+        .btn-primary {
+            background-color: #15171a; 
+            border-color: #bdc4c7;
+            border-radius: 10px; 
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; 
+            border-color: #004085;
+        }
+        .alert-danger {
+            margin-top: 16px; 
+        }
+        .form-p {
+            margin-bottom: 24px; 
+        }
+        .form-p label {
+            font-weight: bold; 
+            display: block; 
+            margin-bottom: 8px; 
+        }
+        .form-p .form-control {
+            border-radius: 6px; 
+        }
+    </style>
+     <body class="ra ">
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="register-container">
+            <h2 class="text-center register-title">Register</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% if user_form.errors or profile_form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>There were some errors with your submission. Please check and try again.</strong>
+                    </div>
+                {% endif %}
+                <!-- Custom form fields styling -->
+                <div class="form-p">
+                    <label for="{{ user_form.username.id_for_label }}" class="form-label">Username</label>
+                    <input type="text" name="username" id="{{ user_form.username.id_for_label }}" class="form-control" 
+                           value="{{ user_form.username.value|default_if_none:'' }}" 
+                           placeholder="Enter your username">
+                </div>
+                <div class="form-p">
+                    <label for="{{ user_form.password1.id_for_label }}" class="form-label">Password</label>
+                    <input type="password" name="password1" id="{{ user_form.password1.id_for_label }}" class="form-control" 
+                           value="{{ user_form.password1.value|default_if_none:'' }}" 
+                           placeholder="Enter your password">
+                </div>
+                <div class="form-p">
+                    <label for="{{ user_form.password2.id_for_label }}" class="form-label">Password Confirmation</label>
+                    <input type="password" name="password2" id="{{ user_form.password2.id_for_label }}" class="form-control" 
+                           value="{{ user_form.password2.value|default_if_none:'' }}" 
+                           placeholder="Confirm your password">
+                </div>
+                <div class="form-p">
+                    <label for="{{ profile_form.phone_number.id_for_label }}" class="form-label">Phone Number</label>
+                    <input type="text" name="phone_number" id="{{ profile_form.phone_number.id_for_label }}" class="form-control" 
+                           value="{{ profile_form.phone_number.value|default_if_none:'' }}" 
+                           placeholder="Enter your phone number">
+                </div>
+                <div class="form-p">
+                    <label for="{{ profile_form.street.id_for_label }}" class="form-label">Street</label>
+                    <input type="text" name="street" id="{{ profile_form.street.id_for_label }}" class="form-control" 
+                           value="{{ profile_form.street.value|default_if_none:'' }}" 
+                           placeholder="Enter your street">
+                </div>
+                <div class="form-p">
+                    <label for="{{ profile_form.city.id_for_label }}" class="form-label">City</label>
+                    <input type="text" name="city" id="{{ profile_form.city.id_for_label }}" class="form-control" 
+                           value="{{ profile_form.city.value|default_if_none:'' }}" 
+                           placeholder="Enter your city">
+                </div>
+                <div class="form-p">
+                    <label for="{{ profile_form.state.id_for_label }}" class="form-label">State</label>
+                    <input type="text" name="state" id="{{ profile_form.state.id_for_label }}" class="form-control" 
+                           value="{{ profile_form.state.value|default_if_none:'' }}" 
+                           placeholder="Enter your state">
+                </div>
+                <div class="form-p">
+                    <label for="{{ profile_form.pin.id_for_label }}" class="form-label">PIN Code</label>
+                    <input type="text" name="pin" id="{{ profile_form.pin.id_for_label }}" class="form-control" 
+                           value="{{ profile_form.pin.value|default_if_none:'' }}" 
+                           placeholder="Enter your PIN code">
+                </div>
+                
+                <button type="submit" class="btn btn-primary mt-2 w-100">Register</button>
+            </form>
+            <div class="text-center mt-3">
+                <p class="text-muted mb-0 d-inline">Already registered?</p>
+                <a href="{% url 'login' %}" class="nav-link d-inline font-weight-bold">Login Here</a>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
